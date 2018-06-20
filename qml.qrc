@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>FinalCountdown.qml</file>
+        <file>OnAir.qml</file>
+        <file>TimeCode.qml</file>
+        <file>helpers.js</file>
+    </qresource>
+</RCC>
