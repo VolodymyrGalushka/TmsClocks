@@ -76,7 +76,9 @@ Item {
                 id: timeText
                 visible: true
                 anchors.centerIn: parent
-                font.pixelSize: 300
+                font.pixelSize: 350
+                font.letterSpacing: 20
+                font.weight: Font.DemiBold
                 color: "white"
                 text:  new Date().toLocaleTimeString(Qt.locale(), "hh:mm A").substring(0, 5)
                 Timer {
@@ -93,7 +95,7 @@ Item {
                 id: tc
 //                width: mainWin.width * 0.2
                 anchors.top: timeText.bottom
-                anchors.topMargin: 10
+                anchors.topMargin: 5
                 anchors.horizontalCenter: timeText.horizontalCenter
                 anchors.horizontalCenterOffset: -250
 //                x: mainWin.width - tc.width - 10

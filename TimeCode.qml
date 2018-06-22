@@ -52,7 +52,7 @@ Item {
     Text {
         id: timeCodeText
         color: "white"
-        font.pixelSize: 128
+        font.pixelSize: 148
         anchors.fill: parent
         text: "00:00:00"
         visible: false
