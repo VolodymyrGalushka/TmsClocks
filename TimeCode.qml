@@ -31,14 +31,13 @@ Item {
         onTriggered: {
             ++timeCode.seconds
             if(timeCode.seconds == 60) {
-                if(timeCode.minutes == 60) {
-                    ++timeCode.hours
-                    timeCode.minutes = 0
-                }
-                else {
-                    ++timeCode.minutes
-                    timeCode.seconds = 0
-                }
+                ++timeCode.minutes
+                timeCode.seconds = 0
+            }
+
+            if(timeCode.minutes == 60) {
+                ++timeCode.hours
+                timeCode.minutes = 0
             }
 
             timeCodeText.text = pad(timeCode.hours) + ":" + pad(timeCode.minutes) + ":" + pad(timeCode.seconds)

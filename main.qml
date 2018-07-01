@@ -9,8 +9,8 @@ Item {
 
     Window {
         id: ctrlWin
-        width: 200
-        height: 100
+        minimumWidth: 200
+        minimumHeight : 200
         title: qsTr("TMS control panel")
         visibility: "Windowed"
         screen: Qt.application.screens[0]
@@ -23,22 +23,32 @@ Item {
             tps: 16
         }
 
-        DelayButton {
-            id: motorBtn
+        Column{
+
+            spacing: 10
             anchors.centerIn: parent
-            delay: 500
-            width: 100
-            height: 30
-            text: "Motor!"
-            onActivated: {
-                timeText.visible = false
-                fc.start()
+
+            Button {
+                id: motorBtn
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: "Motor!"
+                onReleased: {
+                    timeText.visible = false
+                    fc.start()
+                }
+
             }
-            onClicked: {
-                onAir.off()
-                onAirStatus.off()
-                tc.stop()
+
+            Button {
+                id: motorOff
+                text: "Finito"
+                onClicked: {
+                    onAir.off()
+                    onAirStatus.off()
+                    tc.stop()
+                }
             }
+
         }
         onClosing: { Qt.quit() }
     }
@@ -80,10 +90,18 @@ Item {
                 font.letterSpacing: 20
                 font.weight: Font.DemiBold
                 color: "white"
-                text:  new Date().toLocaleTimeString(Qt.locale(), "hh:mm A").substring(0, 5)
+                text:  {
+                    var ct = new Date()
+                    var strct = ct.toLocaleTimeString(Qt.locale(), "hh:mm AP")
+                    return strct.substring(0, 5)
+                }
                 Timer {
                     interval: 1000 * 60; running: true; repeat: true;
-                    onTriggered: timeText.text = new Date().toLocaleTimeString(Qt.locale(), "hh:mm A").substring(0, 5)
+                    onTriggered: {
+                        var ct = new Date()
+                        var strct = ct.toLocaleTimeString(Qt.locale(), "hh:mm AP")
+                        timeText.text = strct.substring(0, 5)
+                    }
                 }
 
                 Behavior on visible {
@@ -93,13 +111,10 @@ Item {
 
             TimeCode {
                 id: tc
-//                width: mainWin.width * 0.2
                 anchors.top: timeText.bottom
                 anchors.topMargin: 5
                 anchors.horizontalCenter: timeText.horizontalCenter
                 anchors.horizontalCenterOffset: -250
-//                x: mainWin.width - tc.width - 10
-//                y: onAir.y
             }
 
     }
